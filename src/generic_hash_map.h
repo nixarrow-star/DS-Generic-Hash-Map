@@ -12,14 +12,15 @@ struct hashmap_node
 struct hashmap
 {
     size_t (*hash_function)(void *);
-    struct link_list *list;
+    struct hashmap_node *list;
+    size_t size;
 };
 
 struct hashmap *hashmap_init(size_t (*hash_function)(void *), size_t nb);
 size_t test_hash_function(struct hashmap *hashmap, void *data);
 struct hashmap *hashmap_insert(struct hashmap *hashmap, void *data, void (*destroy_data)(void *));
-void *hashmap_find(struct hashmap *hashmap, void *data, int (*comparasion_function)(void *, void *));
-struct hashmap *hashmap_pop(struct hashmap *hashmap, struct link_list_node *node);
+struct link_list_node *hashmap_find(struct hashmap *hashmap, void *data, int (*comparasion_function)(void *, void *));
+//struct hashmap *hashmap_pop(struct hashmap *hashmap, struct link_list_node *node);
 void hashmap_destroy(struct hashmap *hashmap);
 
 
